@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspace=nest-api",
-    "start": "npm run start --workspace=nest-api",
+    "start": "npm run start:prod --workspace=nest-api",
     "dev": "npm run start:dev --workspace=nest-api"
   },
   "keywords": [],
