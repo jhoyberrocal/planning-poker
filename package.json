@@ -3,20 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "workspaces": [
-    "nest-api"
+    "nest-api",
+    "www"
   ],
   "scripts": {
+    "prebuild": "npm run build --workspace=www",
     "build": "npm run build --workspace=nest-api",
     "start": "npm run start:prod --workspace=nest-api",
-    "dev": "npm run start:dev --workspace=nest-api"
+    "dev": "npm run start:dev --workspace=nest-api",
+    "dev:client": "npm run start --workspace=www"
   },
   "keywords": [],
   "author": "Jhoy Berrocal",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "@parcel/transformer-vue": "^2.0.0-rc.0",
     "@types/node": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",

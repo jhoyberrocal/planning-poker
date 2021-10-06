@@ -1,0 +1,23 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Jhoy Berrocal",
+  "license": "ISC",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.27",
+    "@types/react-dom": "^17.0.9",
+    "parcel": "^2.0.0-rc.0"
+  }
+}

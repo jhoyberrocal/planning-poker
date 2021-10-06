@@ -4,3 +4,7 @@ nest-api/dist
 nest-api/node_modules
 .env
 .idea
+www/dist
+.parcel-cache
+www/node_modules
+www/.env
