@@ -6,6 +6,11 @@ Starter **Monorepo** template for fullstack apps with typescript with NestJS a v
 - Typescript
 - NestJS
 - MongoDB on starter, NestJS can replace with another databases
+- Passport for Auth services
+- Swagger for documentation of services
 ### Frontend technologies
 - React with TSX
 - Parcel V2 for build client assets
+- React router for routes in front
+- Material UI components lib
+- Axios for requests
