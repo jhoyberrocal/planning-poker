@@ -14,3 +14,5 @@ Starter **Monorepo** template for fullstack apps with typescript with NestJS a v
 - React router for routes in front
 - Material UI components lib
 - Axios for requests
+- Redux for state management
+- Scss for styles
