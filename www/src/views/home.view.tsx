@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { SET_LOADER } from './redux/modules/ui/ui.types';
+import { SET_LOADER } from '~/src/redux/modules/ui/ui.types';
 import Button from '@mui/material/Button';
 
-export default function Home() {
+export default function HomeView() {
     const dispatch = useDispatch();
     const setLoader = () => {
         dispatch({ type: SET_LOADER, payload: true });

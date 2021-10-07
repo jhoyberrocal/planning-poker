@@ -2,7 +2,11 @@
   "compilerOptions": {
     "isolatedModules": true,
     "jsx": "react",
+    "baseUrl": ".",
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "~/*": ["*"],
+    }
   }
 }
