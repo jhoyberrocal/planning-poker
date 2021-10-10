@@ -1,12 +1,30 @@
 {
   "compilerOptions": {
+    "target": "ES2016",
     "isolatedModules": true,
-    "jsx": "react",
-    "baseUrl": ".",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
     "moduleResolution": "node",
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "noEmit": false,
     "esModuleInterop": true,
     "paths": {
-      "~/*": ["*"],
+      "@views/*": ["views/*"],
+      "@components/*": ["components/*"],
+      "@redux/*": ["redux/*"],
+      "@router/*": ["router/*"],
+      "@lib/*": ["lib/*"],
     }
-  }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+  ]
 }

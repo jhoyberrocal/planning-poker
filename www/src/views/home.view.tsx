@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { SET_LOADER } from '~/src/redux/modules/ui/ui.types';
+import { SET_LOADER } from '@redux/modules/ui/ui.types';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 export default function HomeView() {
     const dispatch = useDispatch();
@@ -13,7 +14,8 @@ export default function HomeView() {
     }
     return (
         <React.Fragment>
-            <h1>Home</h1>
+            <h1>Home 2</h1>
+            <Link to="/login">Login</Link>
             <Button onClick={setLoader}>Show Loader</Button>
         </React.Fragment>
     );

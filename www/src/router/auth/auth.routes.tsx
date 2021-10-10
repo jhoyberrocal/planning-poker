@@ -1,6 +1,6 @@
-import LoginView from '~/src/views/auth/login.view';
+import React from 'react';
 
 export default [{
     path: '/login',
-    component: LoginView
+    component: React.lazy(() => import('@views/auth/login.view'))
 }];

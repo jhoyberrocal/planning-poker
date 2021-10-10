@@ -10,8 +10,9 @@ Starter **Monorepo** template for fullstack apps with typescript with NestJS a v
 - Swagger for documentation of services
 ### Frontend technologies
 - React with TSX
-- Parcel V2 for build client assets
+- Webpack
 - React router for routes in front
+- React hook form
 - Material UI components lib
 - Axios for requests
 - Redux for state management
