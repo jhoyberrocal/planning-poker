@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { ResponseAxios } from './types/http';
+import { ResponseAxios } from './types/http.types';
 
 export class HttpClient {
   private readonly baseUrl: string;
@@ -53,7 +53,6 @@ export class HttpClient {
   }
 
   private makeResponse<T>(response: ResponseAxios<T>) {
-    console.log(response);
     const isSuccess = this.successCodes.includes(response.status);
     /** Modify when response changes **/
     const genericResponse = {

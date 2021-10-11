@@ -6,9 +6,12 @@ import { UiState } from '@redux/modules/ui/ui.types';
 import { StoreState } from '@redux/store';
 import { setLoader } from '@redux/modules/ui/ui.actions';
 import { $httpClient } from '@lib/HttpClient';
-import { LoginForm } from '@lib/types/auth/login';
+import { LoginForm } from '@lib/types/auth/login.types';
+import { setAuth } from '@redux/modules/user/user.actions';
+import { useHistory } from 'react-router-dom';
 
 export function LoginView({ loader }: UiState) {
+  const history = useHistory();
   const { control, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const $http = $httpClient(process.env.API_URL as string);
@@ -16,7 +19,10 @@ export function LoginView({ loader }: UiState) {
   const login = async (data: LoginForm) => {
     dispatch(setLoader(true));
     const req = await $http.withBody(data).post('/auth/login');
-    console.log(req);
+    if (req.isSuccess) {
+      dispatch(setAuth(true));
+      history.push('/protected');
+    }
     dispatch(setLoader(false));
   };
 
