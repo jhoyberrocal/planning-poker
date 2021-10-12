@@ -3,10 +3,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const dotenv = require('dotenv');
-const env = dotenv.config({ path: path.join(__dirname, '/.env') }).parsed;
+const env = process.env.NODE_ENV === 'development'
+  ? dotenv.config({ path: path.join(__dirname, '/.env') }).parsed
+  : dotenv.config().parsed;
 
 const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  prev[`process.env.${ next }`] = JSON.stringify(env[next]);
   return prev;
 }, {});
 
@@ -19,39 +21,39 @@ module.exports = {
     plugins: [
       new TsconfigPathsPlugin({
         configFile: path.join(__dirname, 'tsconfig.json'),
-        extensions: [ '.js', '.ts', '.tsx' ]
-      })
-    ]
+        extensions: [ '.js', '.ts', '.tsx' ],
+      }),
+    ],
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [ 'babel-loader' ]
+        use: [ 'babel-loader' ],
       },
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: [ 'ts-loader' ]
+        use: [ 'ts-loader' ],
       },
       {
         test: /\.(css|scss)$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: [ 'style-loader', 'css-loader' ],
       },
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
-        use: [ 'file-loader' ]
-      }
-    ]
+        use: [ 'file-loader' ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'index.html')
+      template: path.join(__dirname, 'src', 'index.html'),
     }),
-    new webpack.DefinePlugin(envKeys)
-  ]
+    new webpack.DefinePlugin(envKeys),
+  ],
 };

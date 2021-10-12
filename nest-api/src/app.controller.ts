@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
     @Get('')
     test() {
-        return "hello world" + process.env.JWT_TOKEN;
+        return "hello world" + process.env.TEST;
     }
 }

@@ -6,3 +6,4 @@ nest-api/node_modules
 www/dist
 .parcel-cache
 www/node_modules
+www/.env
