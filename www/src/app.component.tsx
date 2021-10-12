@@ -1,4 +1,5 @@
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Provider } from 'react-redux';
@@ -17,6 +18,7 @@ export function AppComponent() {
                 <CssBaseline />
                 <LoaderComponent />
                 <Router />
+                <Toaster position="top-left" />
             </ThemeProvider>
         </Provider>
     );

@@ -26,14 +26,27 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    return { token: await this.authService.login(req.user), user: req.user };
+    return {
+      data: {
+        token: await this.authService.login(req.user),
+        user: req.user,
+      },
+      message: 'Success',
+      error: null,
+    };
   }
 
   @ApiResponse({ type: User })
   @UseGuards(JwtAuthGuard)
   @Get('user')
   async user(@Request() req) {
-    return { user: await this.usersService.findOne(req.user.userId) };
+    return {
+      data: {
+        user: await this.usersService.findOne(req.user.userId),
+      },
+      message: 'Success',
+      error: null,
+    };
   }
 
   @ApiResponse({ type: Boolean })

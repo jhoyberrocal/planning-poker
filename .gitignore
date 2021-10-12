@@ -2,9 +2,7 @@ node_modules
 nest-api/.env
 nest-api/dist
 nest-api/node_modules
-www/.env
 .idea
 www/dist
 .parcel-cache
 www/node_modules
-www/.env

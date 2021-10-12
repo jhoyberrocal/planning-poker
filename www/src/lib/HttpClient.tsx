@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { ResponseAxios } from './types/http.types';
+import toast from 'react-hot-toast';
+import { GenericResponse, ResponseAxios } from './types/http.types';
 
 export class HttpClient {
   private readonly baseUrl: string;
@@ -45,25 +46,42 @@ export class HttpClient {
       const req = await this.$axios.post(`${this.baseUrl}${path}`, this.body, {
         params: this.params,
       }) as ResponseAxios<T>;
-      return this.makeResponse(req);
-    } catch (e) {
-      // @ts-ignore
-      return this.makeResponse(e.response || e);
+      return this.makeResponse<T>(req);
+    } catch (error) {
+      return this.handlingError(error);
     }
   }
 
-  private makeResponse<T>(response: ResponseAxios<T>) {
+  private handlingError(error: any) {
+    let messageError: ResponseAxios<null> = {
+      status: 500,
+      data: {
+        message: 'Error: something happened!!',
+        data: null,
+        error,
+      },
+    };
+
+    if (error.response) {
+      messageError = error.response;
+    }
+    return this.makeResponse<null>(messageError);
+  }
+
+  private makeResponse<T>(response: ResponseAxios<T>): GenericResponse<T> {
     const isSuccess = this.successCodes.includes(response.status);
     /** Modify when response changes **/
-    const genericResponse = {
+    const genericResponse: GenericResponse<T> = {
       code: response.status,
-      data: response.data,
+      data: response.data.data,
       error: response.data.error,
       isSuccess,
     };
 
     if (!isSuccess && response.data) {
-      genericResponse.error = response.data.message || response.data.error;
+      genericResponse.error = response.data.error || 'Api handled error';
+      genericResponse.message = response.data.message;
+      toast.error(genericResponse.message as string);
     }
 
     return genericResponse;
