@@ -3,14 +3,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const dotenv = require('dotenv');
-const env = process.env.NODE_ENV === 'development'
-  ? dotenv.config({ path: path.join(__dirname, '/.env') }).parsed
-  : dotenv.config().parsed;
 
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${ next }`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
+process.env.NODE_ENV === 'production' ? dotenv.config() :
+  dotenv.config({ path: path.join(__dirname, '/.env') });
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -54,6 +49,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
     }),
-    new webpack.DefinePlugin(envKeys),
+    new webpack.DefinePlugin({
+      'process.env':{
+        'API_URL': JSON.stringify(process.env.API_URL),
+      },
+    }),
   ],
 };
