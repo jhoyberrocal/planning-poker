@@ -1,15 +1,36 @@
-import { Container, Toolbar, IconButton, Typography, Avatar, Menu, MenuItem } from '@components/mui.components';
+import {
+  Container,
+  Toolbar,
+  IconButton,
+  Typography,
+  Avatar,
+  Menu,
+  MenuItem,
+  TextField,
+} from '@components/mui.components';
 import { indigo } from '@mui/material/colors';
 import PokerLogo from '@assets/png/001-poker.png';
 import AppBar from '@mui/material/AppBar';
 import AccountCircle from '@mui/icons-material/Person';
 import React from 'react';
+import { StoreState } from '@redux/store';
+import { connect, useDispatch } from 'react-redux';
+import { setUsername } from '@redux/modules/user/user.actions';
 
-const LayoutBarComponent = () => {
+type LayoutBarProps = {
+  name: string;
+};
+
+const LayoutBarComponent: React.FC<LayoutBarProps> = ({ name }: LayoutBarProps) => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const changeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setUsername(event.target.value));
   };
 
   return (
@@ -30,7 +51,16 @@ const LayoutBarComponent = () => {
             </Avatar>
           </IconButton>
           <Menu anchorEl={anchorEl} open={!!anchorEl} keepMounted onClose={() => setAnchorEl(null)}>
-            <MenuItem>Jhoy</MenuItem>
+            <MenuItem>Hi! {name}</MenuItem>
+            <MenuItem>
+              <TextField
+                label='Change name'
+                placeholder='Introduce your name'
+                variant='outlined'
+                value={name}
+                onChange={changeName}
+              />
+            </MenuItem>
           </Menu>
         </Toolbar>
       </Container>
@@ -38,4 +68,9 @@ const LayoutBarComponent = () => {
   );
 };
 
-export default LayoutBarComponent;
+const mapStateToProps = (state: StoreState): LayoutBarProps => {
+  const { name } = state.User;
+  return { name: name as string };
+}
+
+export default connect(mapStateToProps)(LayoutBarComponent);
