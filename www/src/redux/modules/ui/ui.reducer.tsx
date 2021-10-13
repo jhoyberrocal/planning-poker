@@ -5,7 +5,7 @@ const initialState: UiState = {
     loader: false,
 };
 
-export default function(state: UiState = initialState, action: ActionToReducer) {
+export default function(state: UiState = initialState, action: ActionToReducer): UiState {
     switch (action.type) {
         case SET_LOADER :
             return { ...state, loader: action.payload };

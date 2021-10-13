@@ -9,9 +9,8 @@ import { $httpClient } from '@lib/http-client';
 import { LoginForm, LoginResponseOK } from '@lib/types/auth/login.types';
 import { setAuth } from '@redux/modules/user/user.actions';
 import { useHistory } from 'react-router-dom';
-import { ResponseAxios } from '@lib/types/http.types';
 
-export function LoginView({ loader }: UiState) {
+export const LoginView: React.FC<UiState> = ({ loader }: UiState) => {
   const history = useHistory();
   const { control, handleSubmit } = useForm();
   const dispatch = useDispatch();
@@ -19,7 +18,9 @@ export function LoginView({ loader }: UiState) {
 
   const login = async (data: LoginForm) => {
     dispatch(setLoader(true));
-    const req = await $http.withBody(data).post<LoginResponseOK>('/auth/login');
+    const req = await $http
+      .withBody<LoginForm>(data)
+      .post<LoginResponseOK>('/auth/login');
     if (req.isSuccess) {
       dispatch(setAuth(true));
       history.push('/protected');

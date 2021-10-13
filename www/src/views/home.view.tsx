@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, Grid, TextField } from '@components/mui.components';
 import PokerImg from '@assets/png/003-pker-1.png';
 
-export default function HomeView() {
+const HomeView: React.FC = () => {
   const dispatch = useDispatch();
   const setLoader = () => {
     dispatch({ type: SET_LOADER, payload: true });
@@ -39,3 +39,5 @@ export default function HomeView() {
     </Card>
   );
 }
+
+export default HomeView;

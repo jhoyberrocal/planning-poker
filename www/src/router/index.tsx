@@ -16,7 +16,7 @@ const publicRoutes = [
   }
 ];
 
-export function Router({ isAuth }: UserState) {
+const Router: React.FC<UserState> = ({ isAuth }: UserState) => {
   const Routes = publicRoutes.map(
     (route: RouteMetaData, idx) =>
       <Route

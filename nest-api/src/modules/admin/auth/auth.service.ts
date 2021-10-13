@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '@modules/admin/auth/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '@modules/admin/auth/users/dto/create-user.dto';
@@ -14,6 +14,11 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     const user = await this.usersService.findOneLogin(email);
+
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
     const passwordMatch = bcrypt.compareSync(password, user.password);
 
     if (user && passwordMatch) {

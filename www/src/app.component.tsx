@@ -12,7 +12,7 @@ import { ThemeDefault } from '@lib/theme';
 
 const theme = createTheme(ThemeDefault);
 
-export function AppComponent() {
+export const AppComponent: React.FC = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
