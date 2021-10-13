@@ -4,7 +4,7 @@ import { SET_LOADER } from '@redux/modules/ui/ui.types';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-export default function HomeView() {
+const HomeView: React.FC = () => {
     const dispatch = useDispatch();
     const setLoader = () => {
         dispatch({ type: SET_LOADER, payload: true });
@@ -20,3 +20,5 @@ export default function HomeView() {
         </React.Fragment>
     );
 }
+
+export default HomeView;

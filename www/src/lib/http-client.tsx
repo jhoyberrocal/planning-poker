@@ -1,8 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import toast from 'react-hot-toast';
 import { GenericResponse, ResponseAxios } from './types/http.types';
+import { ST_ACCESS_TOKEN } from '@lib/constants.conts';
 
 export class HttpClient {
+  private readonly stAccessToken: string = ST_ACCESS_TOKEN;
   private readonly baseUrl: string;
   private readonly successCodes: number[] = [200, 201];
   private $axios: AxiosInstance = axios.create({
@@ -17,61 +19,59 @@ export class HttpClient {
     this.baseUrl = baseUrl;
   }
 
-  get accessToken() {
-    return localStorage.getItem('access_token') as string;
+  get accessToken(): string {
+    return localStorage.getItem(this.stAccessToken) as string;
   }
 
   set accessToken(value: string) {
-    localStorage.setItem('access_token', value);
+    localStorage.setItem(this.stAccessToken, value);
   }
 
-  public withAuthBearer() {
-    (this.$axios.defaults.headers!.common as {}) = {
-      Authorization: `Bearer ${this.accessToken}`,
-    };
+  public withAuthBearer(): HttpClient {
+    ((this.$axios.defaults.headers as Record<string, string>)
+      .common as unknown as Record<string, string>)['Authorization'] = `Bearer ${this.accessToken}`;
+    return this;
   }
 
-  public withBody<T>(data: T) {
+  public withBody<B>(data: B): HttpClient {
     this.body = data;
     return this;
   }
 
-  public withParams<T>(params: T) {
+  public withParams<P>(params: P): HttpClient {
     this.params = { ...params };
     return this;
   }
 
-  public async post<T>(path: string) {
+  public async post<R>(path: string): Promise<GenericResponse<R>> {
     try {
       const req = await this.$axios.post(`${this.baseUrl}${path}`, this.body, {
         params: this.params,
-      }) as ResponseAxios<T>;
-      return this.makeResponse<T>(req);
+      }) as ResponseAxios<R>;
+      return this.makeResponse<R>(req);
     } catch (error) {
-      return this.handlingError(error);
+      return this.handlingError<R>(error);
     }
   }
 
-  private handlingError(error: any) {
-    let messageError: ResponseAxios<null> = {
-      status: 500,
-      data: {
-        message: 'Error: something happened!!',
+  private handlingError<R>(error: unknown): GenericResponse<R> {
+    if (axios.isAxiosError(error) && error.response) {
+      return this.makeResponse<R>(error.response);
+    } else {
+      return {
+        code: 500,
+        isSuccess: false,
         data: null,
-        error,
-      },
-    };
-
-    if (error.response) {
-      messageError = error.response;
+        error: error as string,
+        message: 'Something is happened',
+      };
     }
-    return this.makeResponse<null>(messageError);
   }
 
-  private makeResponse<T>(response: ResponseAxios<T>): GenericResponse<T> {
+  private makeResponse<R>(response: ResponseAxios<R>): GenericResponse<R> {
     const isSuccess = this.successCodes.includes(response.status);
     /** Modify when response changes **/
-    const genericResponse: GenericResponse<T> = {
+    const genericResponse: GenericResponse<R> = {
       code: response.status,
       data: response.data.data,
       error: response.data.error,
@@ -88,4 +88,4 @@ export class HttpClient {
   }
 }
 
-export const $httpClient = (baseUrl: string) => new HttpClient(baseUrl);
+export const $httpClient = (baseUrl: string): HttpClient => new HttpClient(baseUrl);

@@ -11,7 +11,7 @@ const theme = createTheme({
     palette: {},
 });
 
-export function AppComponent() {
+export const AppComponent: React.FC = () => {
     return (
         <Provider store={store}>
             <ThemeProvider theme={theme}>

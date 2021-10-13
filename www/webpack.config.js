@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const dotenv = require('dotenv');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 process.env.NODE_ENV === 'production' ? dotenv.config() :
   dotenv.config({ path: path.join(__dirname, '/.env') });
@@ -22,6 +23,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    port: 6969,
   },
   module: {
     rules: [
@@ -53,6 +55,9 @@ module.exports = {
       'process.env':{
         'API_URL': JSON.stringify(process.env.API_URL),
       },
+    }),
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
     }),
   ],
 };

@@ -11,6 +11,6 @@ export type GenericResponse<T> = {
   code: number;
   isSuccess: boolean;
   error: string | undefined;
-  data: T;
+  data: T | null;
   message?: string;
 };

@@ -1,6 +1,7 @@
+import React from 'react';
 import { Container } from '@components/mui.components';
 
-export function ProtectedView() {
+export const ProtectedView: React.FC = () => {
   return (
     <Container>
       <h1>Jhoy</h1>
