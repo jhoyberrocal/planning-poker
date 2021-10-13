@@ -8,28 +8,27 @@ import { AdminModule } from '@modules/admin/admin.module';
 import { AppController } from './app.controller';
 
 const optionsMongoose = {
-    useFindAndModify: false,
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    connectionFactory: (connection) => {
-        connection.plugin(Autopopulate);
-        return connection;
-    },
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  connectionFactory: (connection) => {
+    connection.plugin(Autopopulate);
+    return connection;
+  },
 };
 
 @Module({
-    imports: [
-        AdminModule,
-        MongooseModule.forRoot(process.env.DB_ADMIN, {
-            connectionName: DB_ADMIN,
-            ...optionsMongoose,
-        }),
-        ServeStaticModule.forRoot({
-            rootPath: join(__dirname, '../../', 'www/dist'),
-        }),
-    ],
-    controllers: [AppController],
+  imports: [
+    AdminModule,
+    MongooseModule.forRoot(process.env.DB_ADMIN, {
+      connectionName: DB_ADMIN,
+      ...optionsMongoose,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../../', 'www/dist'),
+    }),
+  ],
+  controllers: [AppController],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import './loader.component.scss';
 import { UiState } from '@redux/modules/ui/ui.types';
 import { StoreState } from '@redux/store';
 

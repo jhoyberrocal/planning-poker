@@ -22,6 +22,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    port: 6969,
   },
   module: {
     rules: [

@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { UiState } from '@redux/modules/ui/ui.types';
 import { StoreState } from '@redux/store';
 import { setLoader } from '@redux/modules/ui/ui.actions';
-import { $httpClient } from '@lib/HttpClient';
+import { $httpClient } from '@lib/http-client';
 import { LoginForm, LoginResponseOK } from '@lib/types/auth/login.types';
 import { setAuth } from '@redux/modules/user/user.actions';
 import { useHistory } from 'react-router-dom';

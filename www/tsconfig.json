@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES2016",
-    "isolatedModules": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -19,10 +18,12 @@
       "@redux/*": ["redux/*"],
       "@router/*": ["router/*"],
       "@lib/*": ["lib/*"],
+      "@assets/*": ["assets/*"],
     }
   },
   "include": [
-    "src"
+    "src/**/*",
+    "src/png.d.ts",
   ],
   "exclude": [
     "node_modules",
