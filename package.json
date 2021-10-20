@@ -12,7 +12,10 @@
     "start": "npm run start:prod --workspace=nest-api",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:api\"",
     "dev:client": "npm run start --workspace=www",
-    "dev:api": "npm run start:dev --workspace=nest-api"
+    "dev:api": "npm run start:dev --workspace=nest-api",
+    "test:react": "cypress open-ct",
+    "test:integration": "cypress open",
+    "test": "cypress run"
   },
   "keywords": [],
   "author": "Jhoy Berrocal",
@@ -20,13 +23,18 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "moment": "^2.29.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "upgrade": "^1.1.0"
   },
   "devDependencies": {
+    "@cypress/react": "^5.10.1",
+    "@cypress/webpack-dev-server": "^1.6.0",
+    "@cypress/webpack-preprocessor": "^5.9.1",
     "@types/node": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "concurrently": "^6.3.0",
+    "cypress": "^8.6.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
