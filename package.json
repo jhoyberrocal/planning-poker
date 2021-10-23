@@ -23,8 +23,7 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "moment": "^2.29.1",
-    "rimraf": "^3.0.2",
-    "upgrade": "^1.1.0"
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "@cypress/react": "^5.10.1",

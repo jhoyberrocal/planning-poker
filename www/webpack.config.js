@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: [ 'style-loader', 'css-loader' ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
@@ -54,6 +54,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env':{
         'API_URL': JSON.stringify(process.env.API_URL),
+        'WS_URL': JSON.stringify(process.env.WS_URL),
       },
     }),
   ],

@@ -7,14 +7,8 @@ import { Model } from 'mongoose';
 import { GlobalService } from '@config/global.service';
 
 @Injectable()
-export class UsersService extends GlobalService<
-  UserDoc,
-  CreateUserDto,
-  UpdateUserDto
-> {
-  constructor(
-    @InjectModel(User.name) private readonly UsersModel: Model<UserDoc>,
-  ) {
+export class UsersService extends GlobalService<UserDoc, CreateUserDto, UpdateUserDto> {
+  constructor(@InjectModel(User.name) private readonly UsersModel: Model<UserDoc>) {
     super();
     this.modelSchema = this.UsersModel;
   }

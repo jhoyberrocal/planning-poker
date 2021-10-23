@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import toast from 'react-hot-toast';
 import { GenericResponse, ResponseAxios } from './types/http.types';
-import { ST_ACCESS_TOKEN } from '@lib/constants.conts';
+import { ST_ACCESS_TOKEN } from '@lib/constants.const';
 
 export class HttpClient {
   private readonly stAccessToken: string = ST_ACCESS_TOKEN;

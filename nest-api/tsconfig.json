@@ -21,7 +21,9 @@
       "@config/*": ["config/*"],
       "@modules/*": ["modules/*"],
       "@types/*": ["types/*"],
-      "@root/*": ["/*"],
+      "@events/*": ["events/*"],
+      "@db/*": ["db/*"],
+      "@root/*": ["*"],
     }
   }
 }

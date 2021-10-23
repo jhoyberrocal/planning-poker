@@ -1,6 +1,7 @@
 export type UserState = {
   isAuth: boolean;
   name?: string;
+  id?: string;
 };
 
 export const UPDATE_AUTH = 'UPDATE_AUTH';

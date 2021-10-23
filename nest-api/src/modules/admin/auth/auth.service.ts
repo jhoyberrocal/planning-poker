@@ -7,10 +7,7 @@ import { User } from '@modules/admin/auth/users/schemas/user.schema';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private usersService: UsersService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
   async validateUser(email: string, password: string) {
     const user = await this.usersService.findOneLogin(email);

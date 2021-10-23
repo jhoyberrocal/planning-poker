@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { StoreState } from '@redux/store';
 import { RouteMetaData } from '@lib/types/router.types';
 import { UserState } from '@redux/modules/user/user.types';
+import { Container } from '@components/mui.components';
 
 const publicRoutes = [
   ...AdminRoutes,
@@ -13,10 +14,14 @@ const publicRoutes = [
   {
     path: '/',
     component: React.lazy(() => import('@views/home.view')),
-  }
+  },
+  {
+    path: '/room/:id',
+    component: React.lazy(() => import('@views/room.view')),
+  },
 ];
 
-const Router: React.FC<UserState> = ({ isAuth }: UserState) => {
+const Router: React.FC<UserState & { children: any }> = ({ isAuth, children }) => {
   const Routes = publicRoutes.map(
     (route: RouteMetaData, idx) =>
       <Route
@@ -31,9 +36,12 @@ const Router: React.FC<UserState> = ({ isAuth }: UserState) => {
   return (
     <Suspense fallback={<span>Loading ... </span>}>
       <BrowserRouter>
-        <Switch>
-          {Routes}
-        </Switch>
+        <Container maxWidth='lg' sx={{ my: 10 }}>
+          <Switch>
+            {Routes}
+          </Switch>
+        </Container>
+        {children}
       </BrowserRouter>
     </Suspense>
   );
